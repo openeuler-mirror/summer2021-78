@@ -18,7 +18,7 @@ impl Add for USimdI32 {
         return if is_x86_feature_detected!("avx2") {
             unsafe { add_avx2(self, rhs) }
         } else {
-            unsafe { add_avx2(self, rhs) }
+            ...
         }
     }
 }
@@ -31,12 +31,10 @@ unsafe fn add_avx2(mut a: USimdI32, b: USimdI32) -> USimdI32 {
         panic!("Vectors can't be added because the lengths are unequal");
     }
     let group = len_a / 8;
-    let mut tmp =
     for i in 0..len_a {
         _mm256_add_epi32(
             _mm256_set_epi32(a.data[i],a.data[i + 1],a.data[i + 2],a.data[i + 3],a.data[i + 4],a.data[i + 5],a.data[i + 6],a.data[i + 7]),
             _mm256_set_epi32(b.data[i],b.data[i + 1],b.data[i + 2],b.data[i + 3],b.data[i + 4],b.data[i + 5],b.data[i + 6],b.data[i + 7])
         )
     }
-    USimdI32
 }
