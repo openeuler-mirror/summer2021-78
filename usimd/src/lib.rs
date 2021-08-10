@@ -13,7 +13,7 @@ mod tests {
         let b_usimd = USimdI32::from(&b);
         let c = a_usimd + b_usimd;
         for i in 0..16 {
-            assert_eq!(c.data[i],17);
+            assert_eq!(c[i],17);
         }
     }
 }
