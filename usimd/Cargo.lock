@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "usimd1"
+name = "usimd"
 version = "0.1.0"
 dependencies = [
  "len-trait",
