@@ -24,7 +24,7 @@ where
     };
 }
 #[cfg(target_arch = "arm")]
-fn add<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
+fn add_i32<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
 where
     T: IndexMut<usize, Output = i32> + len_trait::Len + ?Sized,
 {
@@ -159,4 +159,19 @@ unsafe fn add_neon<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
         container_a[group * 4 + i] = container_a[group * 4 + i] + container_b[group * 4 + i];
     }
     container_a
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::add::add_i32::add_i32;
+
+    #[test]
+    fn add_i32_works() {
+        let mut a = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let b = vec![10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+        add_i32(&mut a, &b);
+        for i in 0..10 {
+            assert_eq!(a[i], 11);
+        }
+    }
 }

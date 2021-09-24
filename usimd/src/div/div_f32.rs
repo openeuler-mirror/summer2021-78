@@ -161,3 +161,18 @@ unsafe fn div_neon<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
     }
     container_a
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::div::div_f32::div_f32;
+
+    #[test]
+    fn div_f32_works() {
+        let mut a: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0];
+        let b = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0];
+        div_f32(&mut a, &b);
+        for i in 0..10 {
+            assert_eq!(a[i], 1.0);
+        }
+    }
+}
