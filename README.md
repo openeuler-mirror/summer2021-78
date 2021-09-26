@@ -10,12 +10,14 @@ fn main() {
     let mut a = vec![1;len];
     let b = vec![1;len];
     let mut c = vec![0;len];
+//不使用usimd
     let start = time::SystemTime::now();
     for i in 0..len {
         c[i] = a[i] + b[i];
     }
     let end = time::SystemTime::now();
     let time1 = end.duration_since(start).unwrap();
+//使用usimd
     let start = time::SystemTime::now();
     usimd::add_i32(&mut a,&b);
     let end = time::SystemTime::now();
