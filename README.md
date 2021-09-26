@@ -1,6 +1,7 @@
 # Summer2021-No.78 Rust-usimd项目建设
 
 ## 使用usimd计算与不使用usimd计算的效率对比
+分别在不使用usimd和使用usimd的情况下计算Vec<i32>的加法，并比较计算速度。
 
 ```Rust
 use std::time;
@@ -24,14 +25,12 @@ fn main() {
     println!("不使用usimd:{:?}, 使用usimd:{:?}, 效率提升: {}%", time1, time2, up)
 }
 ```
+编译运行
 ```
-vpt@vpt-PC:~/usimd/example/contrast$ cargo run --release
-   Compiling cfg-if v0.1.10
-   Compiling len-trait v0.6.1
-   Compiling usimd v0.1.0 (/home/vpt/usimd)
-   Compiling contrast v0.1.0 (/home/vpt/usimd/example/contrast)
-   Finished release [optimized] target(s) in 0.28s
-     Running `target/release/contrast`
+cargo run --release
+```
+输出
+```
 不使用usimd:69µs, 使用usimd:23.306µs, 效率提升: 296.0611001458852%
 
 ```
