@@ -9,7 +9,7 @@ use std::arch::aarch64::*;
 use std::ops::IndexMut;
 
 #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
-pub(crate) fn add_i8<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
+pub fn add_i8<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
     where
         T: IndexMut<usize, Output = i8> + len_trait::Len + ?Sized,
 {

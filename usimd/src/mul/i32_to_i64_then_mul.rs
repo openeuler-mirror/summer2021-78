@@ -9,7 +9,7 @@ use std::arch::aarch64::*;
 use std::ops::IndexMut;
 
 #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
-pub(crate) fn i32_to_i64_then_mul<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
+pub fn i32_to_i64_then_mul<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
     where
         T: IndexMut<usize, Output = i32> + len_trait::Len + ?Sized,
 {

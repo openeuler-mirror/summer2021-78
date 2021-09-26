@@ -9,7 +9,7 @@ use std::arch::aarch64::*;
 use std::ops::IndexMut;
 
 #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
-pub(crate) fn mul_f64<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
+pub fn mul_f64<'a, T>(container_a: &'a mut T, container_b: &T) -> &'a T
     where
         T: IndexMut<usize, Output = f64> + len_trait::Len + ?Sized,
 {

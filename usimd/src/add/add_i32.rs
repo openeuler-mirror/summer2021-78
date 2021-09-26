@@ -80,18 +80,24 @@ where
     if len_a != len_b {
         panic!("Vectors can't be added because the lengths are unequal");
     }
-
-    let group = len_a / 8;
+    // let ptr = arr2.as_mut_ptr();
+    // (0..LEN).into_iter().for_each(|x| {
+    //     *ptr.add(x) = x as f32;
+    // });
+    let group_len = 8;
+    let group = len_a / group_len;
     for i in 0..group {
-        let a_vector = _mm256_loadu_epi32(&container_a[i * 8] as *const i32);
-        let b_vector = _mm256_loadu_epi32(&container_b[i * 8] as *const i32);
+        let ptr_a = &mut container_a[i * group_len] as *mut i32;
+        let a_vector = _mm256_loadu_epi32(ptr_a);
+        let b_vector = _mm256_loadu_epi32(&container_b[i * group_len] as *const i32);
         _mm256_store_epi32(
-            &mut container_a[i * 8] as *mut i32,
+            ptr_a,
             _mm256_add_epi32(a_vector, b_vector),
         );
     }
-    for i in 0..len_a - group * 8 {
-        container_a[group * 8 + i] = container_a[group * 8 + i] + container_b[group * 8 + i];
+
+    for i in 0..len_a - group * group_len {
+        container_a[group * group_len + i] = container_a[group * group_len + i] + container_b[group * group_len + i];
     }
     container_a
 }
